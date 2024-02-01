@@ -48,4 +48,6 @@ dependencies {
     })
 
     androidTestImplementation('com.microsoft.appcenter:espresso-test-extension:1.4')
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
 }

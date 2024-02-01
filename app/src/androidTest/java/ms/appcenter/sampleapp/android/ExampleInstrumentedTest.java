@@ -23,6 +23,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import androidx.test.rule.ActivityTestRule;
+import android.content.Intent;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -36,6 +39,9 @@ import java.util.Arrays;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+    @Rule
+    public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
+
     @Rule
     public ReportHelper reportHelper = Factory.getReportHelper();
 
@@ -54,6 +60,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void checkTextView1() {
+        activityRule.launchActivity(new Intent());
         onView(withId(R.id.editText1)).perform(typeText("12345678"));
         try {
             Thread.sleep(5000);
@@ -64,6 +71,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void checkTextView2() {
+        activityRule.launchActivity(new Intent());
         int[] buttons = { R.id.radioButton1, R.id.radioButton2, R.id.radioButton3, R.id.radioButton4 };
 
         int index = 0;
@@ -80,6 +88,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void checkFibonacciInTextView3() {
+        activityRule.launchActivity(new Intent());
         int[] fibonacciSample = { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 };
         String fibonacciString = Arrays.toString(fibonacciSample);
         onView(withId(R.id.fibbutton)).perform(click());
