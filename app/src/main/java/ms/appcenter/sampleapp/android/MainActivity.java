@@ -16,6 +16,13 @@ import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 import com.microsoft.appcenter.distribute.Distribute;
 
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.text.TextWatcher;
+import android.text.Editable;
+import android.view.View;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +65,51 @@ public class MainActivity extends AppCompatActivity {
 
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        Button btnClickArr[] = {
+            findViewById(R.id.radioButton1),
+            findViewById(R.id.radioButton2),
+            findViewById(R.id.radioButton3),
+            findViewById(R.id.radioButton4),
+        };
+
+        for(Button btn : btnClickArr) {
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    TextView textview = findViewById(R.id.textView2);
+                    textview.setText(btn.getText().subSequence(6, 7).toString());
+                }
+            });
+        }
+
+        EditText editText = findViewById(R.id.editText1);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                TextView tv = findViewById(R.id.textView1);
+                tv.setText(editText.getText());
+            }
+        });
+
+        Button fibbutton = findViewById(R.id.fibbutton);
+        fibbutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Fibonacci fib = new Fibonacci();
+                String resultString = "";
+                for(int i = 1; i <= 10; i++) {
+                    resultString = resultString + fib.getNthElement(i);
+                    if(i != 10) {
+                        resultString = resultString + ", ";
+                    }
+                }
+                TextView tv = findViewById(R.id.textView3);
+                tv.setText(resultString);
+            }
+        });
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
